@@ -4,17 +4,22 @@ $(function() {
 		{
 			name: 'Tiger',
 			img: 'images/tiger.gif',
-			keys: ["Q".charCodeAt(0), "W".charCodeAt(0), "P".charCodeAt(0), "O".charCodeAt(0)]
+			keys: ["1".charCodeAt(0), "2".charCodeAt(0), "9".charCodeAt(0), "0".charCodeAt(0)]
 		},
 		{
 			name: 'Bear',
 			img: 'images/bear.jpg',
-			keys: ["A".charCodeAt(0), "S".charCodeAt(0), "L".charCodeAt(0), "K".charCodeAt(0)]
+			keys: ["Q".charCodeAt(0), "W".charCodeAt(0), "P".charCodeAt(0), "O".charCodeAt(0)]
 		},
 		{
 			name: 'Monkey',
 			img: 'images/monkey.jpg',
-			keys: ["Z".charCodeAt(0), "X".charCodeAt(0)]
+			keys: ["A".charCodeAt(0), "S".charCodeAt(0), "L".charCodeAt(0), "K".charCodeAt(0)]
+		},
+		{
+			name: 'Monkey Reversed',
+			symlink: 2, // Really just a monkey reversed
+			keys: ["Z".charCodeAt(0), "X".charCodeAt(0), "C".charCodeAt(0), "V".charCodeAt(0)]
 		}
 	];
 	var animationspeed = 1000;
@@ -40,6 +45,11 @@ $(function() {
 			}
 			if (passed == animals[a]['keys'].length) { // Activate this animal
 				console.log('Trigger for ' + animals[a]['name']);
+				if ('symlink' in animals[a]) {
+					a = animals[a]['symlink'];
+					console.log('Symlink to real animal -> ' + animals[a]['name']);
+				}
+
 				activeanimal = a;
 				ignoreselect = 1;
 				$('#play_0').hide();
@@ -79,7 +89,7 @@ $(function() {
 	});
 
 	// Setup img pre-loader
-	for (var a = 0; a < animals.length; a++) {
-		$('#preload').append('<img src="' + animals[a]['img'] + '"/>');
-	}
+	for (var a = 0; a < animals.length; a++)
+		if (animals[a]['img'])
+			$('#preload').append('<img src="' + animals[a]['img'] + '"/>');
 });
