@@ -3,7 +3,7 @@ body {
 	color: white;
 	overflow: hidden;
 	margin: 0;
-	padding: 10px;
+	padding: 0;
 
 	/* Nasty background gradient hacks */
 	background: #1e5799; /* Old browsers */
@@ -16,8 +16,12 @@ body {
 	background: linear-gradient(top, #1e5799 0%,#2989d8 50%,#7db9e8 100%); /* W3C */
 }
 
+#content {
+	background: url('images/background.png') center center no-repeat;
+}
+
 #gamearea td {
-	vertical-align: top;
+	vertical-align: middle;
 	text-align: middle;
 }
 
