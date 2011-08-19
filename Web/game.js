@@ -3,17 +3,17 @@ $(function() {
 	var animals = [
 		{
 			name: 'Tiger',
-			img: 'images/tiger.gif',
+			img: 'images/tiger.png',
 			keys: ["1".charCodeAt(0), "2".charCodeAt(0), "9".charCodeAt(0), "0".charCodeAt(0)]
 		},
 		{
 			name: 'Bear',
-			img: 'images/bear.jpg',
+			img: 'images/bear.png',
 			keys: ["Q".charCodeAt(0), "W".charCodeAt(0), "P".charCodeAt(0), "O".charCodeAt(0)]
 		},
 		{
 			name: 'Monkey',
-			img: 'images/monkey.jpg',
+			img: 'images/monkey.png',
 			keys: ["A".charCodeAt(0), "S".charCodeAt(0), "L".charCodeAt(0), "K".charCodeAt(0)]
 		},
 		{
@@ -52,27 +52,31 @@ $(function() {
 
 				activeanimal = a;
 				ignoreselect = 1;
-				$('#play_0').hide();
+				$('#result, #play_0, #play_1, #play_0_result, #play_1_result, #result').empty().hide();
 				$('#play_0').html('<img src="' + animals[a]['img'] + '"/>');
 				$('#play_0').fadeIn(animationspeed, function() {
 					ignoreselect = 0;	
 
 					// Computer plays
 					companimal = Math.floor(Math.random() * 3);
-					$('#play_1').hide();
 					$('#play_1').html('<img src="' + animals[companimal]['img'] + '"/>');
-					$('#play_1').fadeIn(animationspeed);
+					$('#play_1').fadeIn(animationspeed, function() {
+						$('#result').fadeIn(animationspeed);
+						$('#play_0_result, #play_1_result').effect('bounce', {times: 5}, 200);
+					});
 
 					if (activeanimal == companimal) { // Draw test
-						$('#result').html('Draws with');
+						$('#result').html('<img src="images/beats_d.png"/>');
 					} else if ( // Win test (Unrolled logic for the sake of simplicity)
 						(activeanimal == 0 && companimal == 1) ||
 						(activeanimal == 1 && companimal == 2) ||
 						(activeanimal == 2 && companimal == 0)
 					) {
-						$('#result').html('Beats');
+						$('#result').html('<img src="images/beats_0.png"/>');
+						$('#play_0_result').html('<img id="win" src="images/win.png"/>');
 					} else {
-						$('#result').html('Loses to');
+						$('#result').html('<img src="images/beats_1.png"/>');
+						$('#play_1_result').html('<img id="win" src="images/win.png"/>');
 					}
 				});
 				break;
