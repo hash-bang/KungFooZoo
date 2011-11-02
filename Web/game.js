@@ -1,4 +1,10 @@
 $(function() {
+	$.extend({gamereset: function() {
+		$('#result, #play_0, #play_1, #play_0_result, #play_1_result, #result').empty().hide();
+		$('#result').html('<img src="images/ready.png"/>').fadeIn(animationspeed);
+		ignoreselect = 0;
+	}});
+
 	var keys = [];
 	var animals = [
 		{
@@ -55,8 +61,6 @@ $(function() {
 				$('#result, #play_0, #play_1, #play_0_result, #play_1_result, #result').empty().hide();
 				$('#play_0').html('<img src="' + animals[a]['img'] + '"/>');
 				$('#play_0').fadeIn(animationspeed, function() {
-					ignoreselect = 0;	
-
 					// Computer plays
 					companimal = Math.floor(Math.random() * 3);
 					$('#play_1').html('<img src="' + animals[companimal]['img'] + '"/>');
@@ -78,6 +82,7 @@ $(function() {
 						$('#result').html('<img src="images/beats_1.png"/>');
 						$('#play_1_result').html('<img id="win" src="images/win.png"/>');
 					}
+					setTimeout('$.gamereset()', 5000);
 				});
 				break;
 			}
